@@ -11,6 +11,11 @@
     padding: 16px 18px;
   }
 
+  .admin-logo-frame {
+    width: 190px;
+    height: 58px;
+  }
+
   .admin-sidebar-nav {
     display: flex;
     overflow-x: auto;
@@ -126,7 +131,12 @@
     max-width: 100%;
   }
 
-  .brand span {
+  .brand-logo-frame {
+    width: min(190px, 58vw);
+    height: 52px;
+  }
+
+  .brand span:not(.brand-logo-frame) {
     max-width: 100%;
     white-space: normal;
     text-align: left;

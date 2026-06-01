@@ -1,11 +1,11 @@
 import React from 'react';
-import { CalendarHeart, Lock, LogOut, Menu, UserPlus, X } from 'lucide-react';
-import { adminNavItems, userNavItems } from '../config/navigation';
+import { Lock, LogOut, Menu, UserPlus, X } from 'lucide-react';
+import { adminNavItems } from '../config/navigation';
 import { Button } from './ui';
 
 export default function Header({ currentUser, view, setView, onLogout, mobileNav, setMobileNav, adminArea = false }) {
   const isAdminLoggedIn = adminArea && currentUser?.role === 'admin';
-  const userNav = isAdminLoggedIn ? adminNavItems : adminArea ? [] : userNavItems;
+  const userNav = isAdminLoggedIn ? adminNavItems : [];
   const visibleUser = adminArea && !isAdminLoggedIn ? null : currentUser;
 
   const goHome = () => {
@@ -16,13 +16,20 @@ export default function Header({ currentUser, view, setView, onLogout, mobileNav
     setView('home');
   };
 
+  const goUserNav = (id) => {
+    const protectedViews = ['dashboard', 'profile'];
+    setView(!currentUser && protectedViews.includes(id) ? 'login' : id);
+    setMobileNav(false);
+  };
+
   if (isAdminLoggedIn) {
     return (
       <>
         <aside className="admin-sidebar">
           <button className="admin-sidebar-brand" onClick={goHome}>
-            <CalendarHeart />
-            <span>Bharat Matrimony</span>
+            <span className="brand-logo-frame admin-logo-frame">
+              <img src="/assets/bharat-matrimony-logo.png" alt="Bharat Matrimony" />
+            </span>
           </button>
           <nav className="admin-sidebar-nav">
             {adminNavItems.map((item) => {
@@ -57,14 +64,15 @@ export default function Header({ currentUser, view, setView, onLogout, mobileNav
         {mobileNav ? <X /> : <Menu />}
       </Button>
       <button className="brand" onClick={goHome}>
-        <CalendarHeart />
-        <span>Bharat Matrimony</span>
+        <span className="brand-logo-frame">
+          <img src="/assets/bharat-matrimony-logo.png" alt="Bharat Matrimony" />
+        </span>
       </button>
       <nav className={mobileNav ? 'nav open' : 'nav'}>
         {userNav.map((item) => {
           const Icon = item.icon;
           return (
-            <button key={item.id} className={view === item.id ? 'active' : ''} onClick={() => { setView(item.id); setMobileNav(false); }}>
+            <button key={item.id} className={view === item.id ? 'active' : ''} onClick={() => goUserNav(item.id)}>
               <Icon size={17} /> <span>{item.label}</span>
             </button>
           );

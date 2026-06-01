@@ -17,7 +17,6 @@
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
   flex: 0 1 auto;
   min-width: 0;
   border: 0;
@@ -26,10 +25,35 @@
   font-weight: 900;
   font-size: 1.12rem;
   white-space: nowrap;
-  max-width: min(260px, 30vw);
+  max-width: min(250px, 34vw);
+  padding: 0;
 }
 
-.brand span {
+.brand-logo-frame {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 190px;
+  height: 54px;
+  max-width: 100%;
+  overflow: hidden;
+  border: 1px solid rgba(185, 24, 82, 0.12);
+  border-radius: 16px;
+  background:
+    linear-gradient(135deg, rgba(255, 247, 251, 0.96), rgba(255, 228, 239, 0.9)),
+    #fff7fb;
+  box-shadow: 0 14px 34px rgba(185, 24, 82, 0.13);
+}
+
+.brand-logo-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  filter: saturate(0.92) contrast(1.04) brightness(1.04);
+}
+
+.brand span:not(.brand-logo-frame) {
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -119,16 +143,26 @@
 .admin-sidebar-brand {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
+  justify-content: center;
   width: 100%;
-  min-height: 78px;
-  padding: 18px 22px;
+  min-height: 98px;
+  padding: 18px 20px;
   border: 0;
   border-bottom: 1px solid rgba(255, 216, 231, 0.14);
   color: #fff8fb;
   background: transparent;
   font-size: 1.18rem;
   font-weight: 950;
+}
+
+.admin-logo-frame {
+  width: 214px;
+  height: 66px;
+  border-color: rgba(255, 216, 231, 0.2);
+  background:
+    linear-gradient(135deg, rgba(255, 248, 251, 0.98), rgba(255, 228, 239, 0.94)),
+    #fff7fb;
+  box-shadow: 0 18px 44px rgba(185, 24, 82, 0.2);
 }
 
 .admin-sidebar-brand svg {

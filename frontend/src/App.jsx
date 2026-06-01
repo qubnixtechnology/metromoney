@@ -140,6 +140,13 @@ export default function App() {
     }
   }, [view]);
 
+  useEffect(() => {
+    const protectedViews = ['dashboard', 'profile', 'matches', 'interests', 'messages', 'subscription', 'notifications', 'safety', 'settings'];
+    if (!currentUser && protectedViews.includes(view)) {
+      setView('login');
+    }
+  }, [currentUser, view]);
+
   const login = async (email, password, role) => {
     if (role === 'admin' && !adminArea) {
       notify('Admin login is available only at /admin');
