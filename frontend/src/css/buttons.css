@@ -1,0 +1,57 @@
+.nav button,
+.ghost-button,
+.primary-button,
+.danger-button,
+.icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 42px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 10px clamp(10px, 1.4vw, 14px);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.primary-button {
+  color: white;
+  background: linear-gradient(135deg, var(--berry-dark), var(--berry), var(--rose));
+  box-shadow: 0 14px 30px rgba(185, 24, 82, 0.28);
+}
+
+.primary-button:hover,
+.ghost-button:hover,
+.danger-button:hover,
+.icon-button:hover {
+  transform: translateY(-2px);
+}
+
+.primary-button.done {
+  background: linear-gradient(135deg, #087a73, #2aa99a);
+  box-shadow: 0 12px 26px rgba(8, 122, 115, 0.2);
+}
+
+.ghost-button {
+  color: #403746;
+  background: rgba(255, 255, 255, 0.92);
+  border-color: var(--line);
+}
+
+.danger-button {
+  color: white;
+  background: #3e2a31;
+}
+
+.icon-button {
+  width: 44px;
+  padding: 0;
+  color: var(--berry);
+  background: white;
+  border-color: var(--line);
+}
+
+.big {
+  min-height: 52px;
+  padding-inline: 20px;
+}

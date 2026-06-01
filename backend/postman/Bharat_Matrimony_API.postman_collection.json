@@ -1,0 +1,439 @@
+{
+  "info": {
+    "name": "Bharat Matrimony API",
+    "description": "Postman collection for the Bharat Matrimony PHP backend. Start backend at http://localhost:8080 and login first for protected APIs so Postman stores the session cookie.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8080"
+    }
+  ],
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "User Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"user@example.com\",\n  \"password\": \"User@123\",\n  \"role\": \"user\"\n}"
+            },
+            "url": "{{base_url}}/auth/login.php"
+          }
+        },
+        {
+          "name": "Admin Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@matrimony.local\",\n  \"password\": \"Admin@123\",\n  \"role\": \"admin\"\n}"
+            },
+            "url": "{{base_url}}/auth/login.php"
+          }
+        },
+        {
+          "name": "Current User",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/auth/me.php"
+          }
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/auth/logout.php"
+          }
+        },
+        {
+          "name": "Register User",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Sarita Sharma\",\n  \"email\": \"sarita@example.com\",\n  \"password\": \"Sarita@123\",\n  \"age\": 26,\n  \"height\": \"5ft 4in\",\n  \"city\": \"Delhi\",\n  \"religion\": \"Hindu\",\n  \"community\": \"Punjabi\",\n  \"profession\": \"Software Engineer\",\n  \"education\": \"B.Tech\",\n  \"income\": \"12 LPA\",\n  \"bio\": \"Family-oriented and looking for a meaningful connection.\",\n  \"photo\": \"https://example.com/profile.jpg\"\n}"
+            },
+            "url": "{{base_url}}/auth/register.php"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Profiles",
+      "item": [
+        {
+          "name": "Get Profiles",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/profiles/index.php"
+          }
+        },
+        {
+          "name": "Get Profiles With Filters",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/profiles/index.php?city=Mumbai&religion=Hindu&query=Doctor"
+          }
+        },
+        {
+          "name": "Update Logged-in Profile",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Sarita Sharma\",\n  \"age\": 26,\n  \"height\": \"5ft 4in\",\n  \"city\": \"Mumbai\",\n  \"religion\": \"Hindu\",\n  \"community\": \"Punjabi\",\n  \"profession\": \"Doctor\",\n  \"education\": \"MBBS\",\n  \"income\": \"16 LPA\",\n  \"bio\": \"Family-oriented and looking for a meaningful connection.\",\n  \"photo\": \"https://example.com/profile-photo.jpg\",\n  \"intro_video\": \"https://example.com/intro-video.mp4\"\n}"
+            },
+            "url": "{{base_url}}/profiles/index.php"
+          }
+        },
+        {
+          "name": "Upload Media",
+          "request": {
+            "method": "POST",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                { "key": "type", "value": "photo", "type": "text" },
+                { "key": "media", "type": "file", "src": "" }
+              ]
+            },
+            "url": "{{base_url}}/media/index.php"
+          }
+        }
+      ]
+    },
+    {
+      "name": "User Features",
+      "item": [
+        {
+          "name": "Get Interests",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/interests/index.php"
+          }
+        },
+        {
+          "name": "Send Interest",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"receiver_id\": 3\n}"
+            },
+            "url": "{{base_url}}/interests/index.php"
+          }
+        },
+        {
+          "name": "Get Messages",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/messages/index.php"
+          }
+        },
+        {
+          "name": "Send Message",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"receiver_id\": 3,\n  \"body\": \"Hi Mira, your profile looks interesting. I would like our families to connect.\"\n}"
+            },
+            "url": "{{base_url}}/messages/index.php"
+          }
+        },
+        {
+          "name": "Get Calls",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/calls/index.php"
+          }
+        },
+        {
+          "name": "Schedule Call",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"receiver_id\": 3,\n  \"call_type\": \"family_video\",\n  \"scheduled_at\": \"2026-06-05 18:30:00\"\n}"
+            },
+            "url": "{{base_url}}/calls/index.php"
+          }
+        },
+        {
+          "name": "Update Call Status",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": 1,\n  \"status\": \"completed\"\n}"
+            },
+            "url": "{{base_url}}/calls/index.php"
+          }
+        },
+        {
+          "name": "Get Matches",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/matches/index.php"
+          }
+        },
+        {
+          "name": "Get Reports",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/reports/index.php"
+          }
+        },
+        {
+          "name": "Create Report",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"reported_user_id\": 3,\n  \"reason\": \"Fake profile\",\n  \"details\": \"Profile details look suspicious.\"\n}"
+            },
+            "url": "{{base_url}}/reports/index.php"
+          }
+        },
+        {
+          "name": "Get Verifications",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/verification/index.php"
+          }
+        },
+        {
+          "name": "Create Verification",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"government_id\",\n  \"document_url\": \"https://example.com/document.jpg\",\n  \"notes\": \"Submitted for review\"\n}"
+            },
+            "url": "{{base_url}}/verification/index.php"
+          }
+        },
+        {
+          "name": "Get Notifications",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/notifications/index.php"
+          }
+        },
+        {
+          "name": "Create Notification",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"channel\": \"in_app\",\n  \"title\": \"New match suggestion\",\n  \"body\": \"You have a new compatible profile.\"\n}"
+            },
+            "url": "{{base_url}}/notifications/index.php"
+          }
+        },
+        {
+          "name": "Get Subscription Plans",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/subscriptions/index.php"
+          }
+        },
+        {
+          "name": "Select Subscription",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"plan_id\": \"premium\"\n}"
+            },
+            "url": "{{base_url}}/subscriptions/index.php"
+          }
+        }
+      ]
+    },
+    {
+      "name": "CMS",
+      "item": [
+        {
+          "name": "Get Public CMS Pages",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/cms/index.php"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin",
+      "item": [
+        {
+          "name": "Get Admin Users",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/admin/users.php"
+          }
+        },
+        {
+          "name": "Update User Status",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": 3,\n  \"status\": \"approved\"\n}"
+            },
+            "url": "{{base_url}}/admin/users.php"
+          }
+        },
+        {
+          "name": "Get Admin Stats",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/admin/stats.php"
+          }
+        },
+        {
+          "name": "Approve Profile",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": 3,\n  \"action\": \"approve\"\n}"
+            },
+            "url": "{{base_url}}/admin/profiles.php"
+          }
+        },
+        {
+          "name": "Block Profile",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": 3,\n  \"action\": \"block\"\n}"
+            },
+            "url": "{{base_url}}/admin/profiles.php"
+          }
+        },
+        {
+          "name": "Get Admin CMS Pages",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/admin/cms.php"
+          }
+        },
+        {
+          "name": "Save CMS Page",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"slug\": \"home-banner\",\n  \"title\": \"Bharat Matrimony\",\n  \"content\": \"Premium verified matchmaking for modern families.\",\n  \"status\": \"published\"\n}"
+            },
+            "url": "{{base_url}}/admin/cms.php"
+          }
+        },
+        {
+          "name": "Get Admin Analytics",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/admin/analytics.php"
+          }
+        },
+        {
+          "name": "Get Admin Marketing",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/admin/marketing.php"
+          }
+        },
+        {
+          "name": "Create Marketing Campaign",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Premium Offer\",\n  \"channel\": \"email\",\n  \"message\": \"Upgrade today and unlock premium matchmaking.\",\n  \"status\": \"queued\"\n}"
+            },
+            "url": "{{base_url}}/admin/marketing.php"
+          }
+        },
+        {
+          "name": "Get Admin Payments",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/admin/payments.php"
+          }
+        },
+        {
+          "name": "Get Admin Reports",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/admin/reports.php"
+          }
+        },
+        {
+          "name": "Get Admin Verification",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/admin/verification.php"
+          }
+        }
+      ]
+    }
+  ]
+}

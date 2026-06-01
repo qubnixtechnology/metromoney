@@ -1,0 +1,224 @@
+.admin-layout {
+  display: grid;
+  gap: 22px;
+}
+
+.admin-dashboard-hero {
+  display: grid;
+  gap: 12px;
+  padding: clamp(26px, 4vw, 48px);
+  border: 1px solid rgba(185, 24, 82, 0.12);
+  border-radius: 18px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 232, 242, 0.74)),
+    radial-gradient(circle at 85% 12%, rgba(248, 168, 200, 0.35), transparent 30%);
+  box-shadow: 0 24px 60px rgba(80, 18, 44, 0.09);
+}
+
+.admin-dashboard-hero span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  width: fit-content;
+  padding: 8px 11px;
+  color: var(--berry);
+  background: rgba(255, 255, 255, 0.76);
+  border-radius: 999px;
+  font-weight: 850;
+}
+
+.admin-dashboard-hero h1 {
+  margin-bottom: 0;
+  font-size: clamp(2.3rem, 5vw, 5rem);
+  background: linear-gradient(120deg, #311725, var(--berry), #f06f98);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.admin-dashboard-hero p {
+  max-width: 850px;
+  margin-bottom: 0;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.admin-section-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+}
+
+.admin-section-card {
+  display: grid;
+  gap: 16px;
+  padding: 22px;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(185, 24, 82, 0.1);
+  border-radius: 16px;
+  box-shadow: 0 18px 46px rgba(80, 18, 44, 0.08);
+}
+
+.admin-section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--ink);
+  font-size: 1.05rem;
+}
+
+.admin-section-title svg {
+  color: var(--berry);
+}
+
+.admin-section-card p {
+  color: var(--muted);
+  line-height: 1.6;
+  margin-bottom: 0;
+}
+
+.admin-mini-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.admin-mini-metrics span {
+  display: grid;
+  gap: 3px;
+  padding: 10px;
+  border-radius: 10px;
+  background: #fff7fb;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.admin-mini-metrics b {
+  color: var(--berry);
+  font-size: 1.05rem;
+}
+
+.admin-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.admin-stats article {
+  display: grid;
+  gap: 8px;
+  padding: 24px;
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.admin-stats svg {
+  color: var(--teal);
+}
+
+.admin-stats span {
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--berry);
+}
+
+.admin-table {
+  display: grid;
+  gap: 14px;
+}
+
+.admin-row {
+  display: grid;
+  grid-template-columns: 64px 1fr auto auto;
+  gap: 14px;
+  align-items: center;
+  padding: 18px;
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.admin-row p {
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.admin-row img {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.cms-editor-grid {
+  display: grid;
+  grid-template-columns: minmax(240px, 320px) minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.cms-page-list,
+.cms-editor-panel {
+  display: grid;
+  gap: 14px;
+  padding: 22px;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(185, 24, 82, 0.1);
+  border-radius: 16px;
+  box-shadow: 0 18px 46px rgba(80, 18, 44, 0.08);
+}
+
+.cms-page-list {
+  position: sticky;
+  top: 98px;
+}
+
+.cms-page-list button {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px;
+  align-items: start;
+  min-height: 58px;
+  padding: 12px;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  color: var(--muted);
+  background: transparent;
+  text-align: left;
+}
+
+.cms-page-list button.active,
+.cms-page-list button:hover {
+  color: var(--berry);
+  background: #fff0f6;
+  border-color: rgba(185, 24, 82, 0.12);
+}
+
+.cms-page-list svg {
+  margin-top: 2px;
+}
+
+.cms-page-list span {
+  display: grid;
+  gap: 4px;
+  color: inherit;
+  font-weight: 900;
+}
+
+.cms-page-list small {
+  color: var(--muted);
+  font-weight: 650;
+  line-height: 1.35;
+}
+
+.cms-editor-panel h2 {
+  margin-bottom: 8px;
+}
+
+.cms-editor-panel p {
+  color: var(--muted);
+  line-height: 1.6;
+}
