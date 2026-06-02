@@ -34,7 +34,7 @@ function json_response(array $payload, int $status = 200): void
     header('Content-Type: application/json');
     header('Access-Control-Allow-Origin: ' . ($_SERVER['HTTP_ORIGIN'] ?? '*'));
     header('Access-Control-Allow-Credentials: true');
-    header('Access-Control-Allow-Headers: Content-Type');
+    header('Access-Control-Allow-Headers: Content-Type, Authorization');
     header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
     echo json_encode($payload);
     exit;
@@ -47,4 +47,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 if (session_status() !== PHP_SESSION_ACTIVE) {
     session_start();
 }
-

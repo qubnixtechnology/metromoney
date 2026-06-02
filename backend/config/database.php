@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 require_once dirname(__DIR__) . '/core/bootstrap.php';
+require_once dirname(__DIR__) . '/core/jwt.php';
 
 function db(): PDO
 {
@@ -33,10 +34,25 @@ function request_json(): array
 
 function require_user(): array
 {
-    if (empty($_SESSION['user'])) {
+    $payload = verify_jwt(get_bearer_token());
+
+    if (!$payload) {
         json_response(['error' => 'Authentication required'], 401);
     }
-    return $_SESSION['user'];
+
+    $stmt = db()->prepare('SELECT * FROM users WHERE id = ? LIMIT 1');
+    $stmt->execute([(int) $payload['sub']]);
+    $user = $stmt->fetch();
+
+    if (!$user) {
+        json_response(['error' => 'User not found'], 401);
+    }
+
+    if (($user['status'] ?? '') === 'blocked') {
+        json_response(['error' => 'Account is blocked'], 403);
+    }
+
+    return public_user($user);
 }
 
 function require_admin(): array
