@@ -33,7 +33,9 @@ $stmt->execute([
 
 $id = (int) db()->lastInsertId();
 $user = db()->query("SELECT * FROM users WHERE id = {$id}")->fetch();
-$_SESSION['user'] = public_user($user);
+$publicUser = public_user($user);
 
-json_response(['user' => $_SESSION['user']], 201);
-
+json_response([
+    'user' => $publicUser,
+    'token' => create_jwt($publicUser),
+], 201);

@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import Header from './components/Header';
 import Toast from './components/Toast';
-import { API_BASE, apiRequest, apiUpload } from './services/api';
+import { API_BASE, apiRequest, apiUpload, clearAuthToken, setAuthToken } from './services/api';
 import { storageGet, storageSet } from './utils/storage';
 import { calculateCompatibility, calculateFraudRisk } from './utils/matchmaking';
 import AdminPage from './pages/AdminPage';
@@ -155,6 +155,7 @@ export default function App() {
 
     try {
       const payload = await apiRequest('/auth/login.php', { method: 'POST', body: { email, password, role } });
+      setAuthToken(payload.token);
       persist('bharat_user', payload.user, setCurrentUser);
       setView(payload.user.role === 'admin' ? 'admin' : 'dashboard');
       notify(`Welcome back, ${payload.user.name}`);
@@ -182,6 +183,7 @@ export default function App() {
 
     try {
       const payload = await apiRequest('/auth/register.php', { method: 'POST', body: newUser });
+      setAuthToken(payload.token);
       let registeredUser = payload.user;
       if (photoFile) {
         const formData = new FormData();
@@ -216,6 +218,7 @@ export default function App() {
     } catch {
       // Demo mode needs no network cleanup.
     }
+    clearAuthToken();
     localStorage.removeItem('bharat_user');
     setCurrentUser(null);
     setView(window.location.pathname.startsWith('/admin') ? 'admin-login' : 'home');
@@ -226,6 +229,7 @@ export default function App() {
     let updated = { ...currentUser, ...form };
     try {
       const payload = await apiRequest('/profiles/index.php', { method: 'PUT', body: form });
+      setAuthToken(payload.token);
       updated = payload.user;
     } catch {
       if (API_BASE) {

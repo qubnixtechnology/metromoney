@@ -20,5 +20,9 @@ if ($user['status'] === 'blocked') {
     json_response(['error' => 'Account is blocked'], 403);
 }
 
-$_SESSION['user'] = public_user($user);
-json_response(['user' => $_SESSION['user']]);
+$publicUser = public_user($user);
+
+json_response([
+    'user' => $publicUser,
+    'token' => create_jwt($publicUser),
+]);

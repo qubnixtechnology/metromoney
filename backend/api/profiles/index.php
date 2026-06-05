@@ -4,7 +4,16 @@ declare(strict_types=1);
 require_once __DIR__ . '/../db.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    $user = $_SESSION['user'] ?? null;
+    $tokenPayload = verify_jwt(get_bearer_token());
+    $user = null;
+
+    if (!empty($tokenPayload['sub'])) {
+        $userStmt = db()->prepare('SELECT * FROM users WHERE id = ? LIMIT 1');
+        $userStmt->execute([(int) $tokenPayload['sub']]);
+        $foundUser = $userStmt->fetch();
+        $user = $foundUser ? public_user($foundUser) : null;
+    }
+
     $where = ['role = "user"', 'status != "blocked"'];
     $params = [];
 
@@ -51,8 +60,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
     db()->prepare('UPDATE users SET ' . implode(', ', $sets) . ' WHERE id = ?')->execute($params);
     $stmt = db()->prepare('SELECT * FROM users WHERE id = ?');
     $stmt->execute([$user['id']]);
-    $_SESSION['user'] = public_user($stmt->fetch());
-    json_response(['user' => $_SESSION['user']]);
+    $updatedUser = public_user($stmt->fetch());
+    json_response([
+        'user' => $updatedUser,
+        'token' => create_jwt($updatedUser),
+    ]);
 }
 
 json_response(['error' => 'Method not allowed'], 405);
